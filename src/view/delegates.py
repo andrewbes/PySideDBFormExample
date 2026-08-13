@@ -3,15 +3,28 @@
 from __future__ import annotations
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QComboBox, QDoubleSpinBox, QStyledItemDelegate, QWidget
+from PySide6.QtWidgets import (
+    QComboBox,
+    QDoubleSpinBox,
+    QStyledItemDelegate,
+    QStyleOptionViewItem,
+    QWidget,
+)
 
 from src.viewmodel.spec_table_model import SpecTableModel
 
 
 class GoodsDelegate(QStyledItemDelegate):
+    def initStyleOption(self, option: QStyleOptionViewItem, index) -> None:  # noqa: N802
+        super().initStyleOption(option, index)
+        text = index.data(Qt.ItemDataRole.DisplayRole)
+        option.text = "" if text is None else str(text)
+        option.displayAlignment = Qt.AlignmentFlag.AlignVCenter | Qt.AlignmentFlag.AlignLeft
+
     def createEditor(self, parent: QWidget, option, index) -> QWidget:  # noqa: N802
         combo = QComboBox(parent)
         combo.setFrame(False)
+        combo.setEditable(False)
         model: SpecTableModel = index.model()
         combo.addItem("— оберіть товар —", None)
         for item in model.goods():

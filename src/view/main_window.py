@@ -171,8 +171,11 @@ class MainWindow(QMainWindow):
         self.table.setSelectionBehavior(QTableView.SelectionBehavior.SelectRows)
         self.table.setSelectionMode(QTableView.SelectionMode.SingleSelection)
         self.table.setShowGrid(False)
-        self.table.verticalHeader().setVisible(False)
-        self.table.verticalHeader().setDefaultSectionSize(40)
+        vertical = self.table.verticalHeader()
+        vertical.setVisible(False)
+        vertical.setMinimumSectionSize(40)
+        vertical.setDefaultSectionSize(40)
+        vertical.setSectionResizeMode(QHeaderView.ResizeMode.Fixed)
         self.table.setItemDelegateForColumn(0, GoodsDelegate(self.table))
         self.table.setItemDelegateForColumn(1, MoneyDelegate(3, self.table))
         self.table.setItemDelegateForColumn(2, MoneyDelegate(2, self.table))
@@ -296,6 +299,8 @@ class MainWindow(QMainWindow):
 
         self.table.resizeColumnsToContents()
         self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
+        for row in range(self._vm.spec_model.rowCount()):
+            self.table.setRowHeight(row, 40)
 
     def _on_total_changed(self, text: str) -> None:
         self.total_value.setText(f"{text} грн")

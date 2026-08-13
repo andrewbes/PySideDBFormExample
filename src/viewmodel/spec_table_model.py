@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from PySide6.QtCore import QAbstractTableModel, QModelIndex, Qt, Signal
+from PySide6.QtGui import QColor
 
 from src.model.entities import Goods, SpecRow
 
@@ -109,6 +110,9 @@ class SpecTableModel(QAbstractTableModel):
                 return format_money(row.cost)
             if column == 3:
                 return format_money(row.amount)
+
+        if role == Qt.ItemDataRole.ForegroundRole:
+            return QColor("#111827")
 
         if role == Qt.ItemDataRole.TextAlignmentRole:
             if column == 0:

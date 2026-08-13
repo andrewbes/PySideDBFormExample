@@ -44,11 +44,13 @@ QLabel#fieldLabel {
 
 QLineEdit, QDateEdit, QComboBox {
     background: #F8FAFC;
+    color: #111827;
     border: 1px solid #E5E7EB;
     border-radius: 10px;
     padding: 8px 12px;
     min-height: 22px;
     selection-background-color: #C7D2FE;
+    selection-color: #111827;
 }
 
 QLineEdit:focus, QDateEdit:focus, QComboBox:focus {
@@ -63,6 +65,7 @@ QDateEdit::drop-down, QComboBox::drop-down {
 
 QComboBox QAbstractItemView {
     background: #FFFFFF;
+    color: #111827;
     border: 1px solid #E5E7EB;
     selection-background-color: #EEF2FF;
     selection-color: #111827;
@@ -90,6 +93,7 @@ QLabel#totalValue {
 
 QTableView {
     background: #FFFFFF;
+    color: #111827;
     alternate-background-color: #F8FAFC;
     border: none;
     gridline-color: #F3F4F6;
@@ -99,7 +103,14 @@ QTableView {
 }
 
 QTableView::item {
+    color: #111827;
+    background: #FFFFFF;
     padding: 6px 10px;
+}
+
+QTableView::item:alternate {
+    color: #111827;
+    background: #F8FAFC;
 }
 
 QHeaderView::section {
@@ -113,6 +124,7 @@ QHeaderView::section {
 }
 
 QTableView::item:selected {
+    color: #111827;
     background: #EEF2FF;
 }
 
